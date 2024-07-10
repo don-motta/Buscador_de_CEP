@@ -20,6 +20,7 @@ public class Buscador {
         Scanner sc = new Scanner(System.in);
         System.out.println("Seja bem vindo!");
         char exit;
+        FileWriter jsonLog = new FileWriter("jsonLog.json");
         do {
             System.out.println( "Digite o número CEP (sem hifen) que deseja pesquisar para encontrar o endereço:");
             try {
@@ -49,9 +50,7 @@ public class Buscador {
                 ViaCEP searchResult = gson.fromJson(json, ViaCEP.class);
                 Cep result = new Cep(searchResult);
                 System.out.println(result);
-                FileWriter jsonLog = new FileWriter("jsonLog.json");
-                jsonLog.write(gson.toJson(result));
-                jsonLog.close();
+                jsonLog.write(gson.toJson(result));                
             } catch (StringIndexOutOfBoundsException | InvalidCepException e) {
                 System.out.println("Número invalido! Digite novamente, lembrando que o número do CEP deve ter exatamente 8 digitos numéricos, e deverá ser digitado sem hifen.");
             } catch (AddressNotFoundException e) {
@@ -63,5 +62,6 @@ public class Buscador {
                 exit = sc.nextLine().charAt(0);
             }
         } while (exit == 's');
+        jsonLog.close();
     }
 }
