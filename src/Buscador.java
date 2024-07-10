@@ -62,6 +62,7 @@ public class Buscador {
                 exit = sc.nextLine().charAt(0);
             }
         } while (exit == 's');
+        System.out.printn("Prograna finalizado!");
         jsonLog.close();
     }
 }
